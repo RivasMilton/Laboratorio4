@@ -122,7 +122,7 @@ int main() {
     return 0;
 }
 
-//punto extra :D
+//punto extra :)
 bool editarPaquete(int id) {
     Nodo* aux = head;
     while (aux != NULL) {
