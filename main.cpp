@@ -121,3 +121,18 @@ int main() {
 
     return 0;
 }
+
+//punto extra :D
+bool editarPaquete(int id) {
+    Nodo* aux = head;
+    while (aux != NULL) {
+        if (aux->id == id) {
+            cin >> aux->nombre;
+            cin >> aux->peso;
+            return true;
+        }
+        aux = aux->sig;
+    }
+    return false;
+}
+
