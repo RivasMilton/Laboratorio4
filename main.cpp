@@ -1,6 +1,11 @@
 #include <iostream>
 using namespace std;
-int main()
-{
-    
-}
+
+struct Nodo {
+    int id;
+    string nombre;
+    float peso;
+    Nodo* sig;
+    Nodo* ant;
+};
+ 
