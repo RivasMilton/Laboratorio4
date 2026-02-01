@@ -1,21 +1,24 @@
 #include <iostream>
 using namespace std;
 
-struct Nodo {
+struct Nodo
+{
     int id;
     string nombre;
     float peso;
-    Nodo* sig;
-    Nodo* ant;
+    Nodo *sig;
+    Nodo *ant;
 };
 
-Nodo* head = NULL;
-Nodo* tail = NULL;
+Nodo *head = NULL;
+Nodo *tail = NULL;
 int contador = 0;
 
-Nodo* buscarPorId(int id) {
-    Nodo* aux = head;
-    while (aux != NULL) {
+Nodo *buscarPorId(int id)
+{
+    Nodo *aux = head;
+    while (aux != NULL)
+    {
         if (aux->id == id)
             return aux;
         aux = aux->sig;
@@ -23,64 +26,79 @@ Nodo* buscarPorId(int id) {
     return NULL;
 }
 
-void insertarInicio(int id, string nombre, float peso) {
-
-    if (buscarPorId(id) != NULL) {
+void insertarInicio(int id, string nombre, float peso)
+{
+    if (buscarPorId(id) != NULL)
+    {
         cout << "ID repetido\n";
         return;
     }
 
-    Nodo* nuevo = new Nodo();
+    Nodo *nuevo = new Nodo();
     nuevo->id = id;
     nuevo->nombre = nombre;
     nuevo->peso = peso;
 
-    if (head == NULL) {
+    if (head == NULL)
+    {
         head = tail = nuevo;
         nuevo->sig = NULL;
         nuevo->ant = NULL;
-    } else {
+    }
+    else
+    {
         nuevo->sig = head;
         nuevo->ant = NULL;
         head->ant = nuevo;
         head = nuevo;
     }
+
     contador++;
+    cout << "Insertado al inicio\n";
 }
 
-void insertarFinal(int id, string nombre, float peso) {
-
-    if (buscarPorId(id) != NULL) {
+void insertarFinal(int id, string nombre, float peso)
+{
+    if (buscarPorId(id) != NULL)
+    {
         cout << "ID repetido\n";
         return;
     }
 
-    Nodo* nuevo = new Nodo();
+    Nodo *nuevo = new Nodo();
     nuevo->id = id;
     nuevo->nombre = nombre;
     nuevo->peso = peso;
 
-    if (head == NULL) {
+    if (head == NULL)
+    {
         head = tail = nuevo;
         nuevo->sig = NULL;
         nuevo->ant = NULL;
-    } else {
+    }
+    else
+    {
         tail->sig = nuevo;
         nuevo->ant = tail;
         nuevo->sig = NULL;
         tail = nuevo;
     }
+
     contador++;
+    cout << "Insertado al final\n";
 }
 
-void mostrarAdelante() {
-    if (head == NULL) {
+void mostrarAdelante()
+{
+    if (head == NULL)
+    {
         cout << "Lista vacia\n";
         return;
     }
 
-    Nodo* aux = head;
-    while (aux != NULL) {
+    Nodo *aux = head;
+    while (aux != NULL)
+    {
         cout << "[" << aux->id << "] "
              << aux->nombre << " - "
              << aux->peso << "kg\n";
@@ -88,14 +106,17 @@ void mostrarAdelante() {
     }
 }
 
-void mostrarAtras() {
-    if (tail == NULL) {
+void mostrarAtras()
+{
+    if (tail == NULL)
+    {
         cout << "Lista vacia\n";
         return;
     }
 
-    Nodo* aux = tail;
-    while (aux != NULL) {
+    Nodo *aux = tail;
+    while (aux != NULL)
+    {
         cout << "[" << aux->id << "] "
              << aux->nombre << " - "
              << aux->peso << "kg\n";
@@ -103,30 +124,36 @@ void mostrarAtras() {
     }
 }
 
-void eliminarPorId(int id) {
-
-    if (head == NULL) {
+void eliminarPorId(int id)
+{
+    if (head == NULL)
+    {
         cout << "Lista vacia\n";
         return;
     }
 
-    Nodo* aux = head;
+    Nodo *aux = head;
 
-    while (aux != NULL) {
-        if (aux->id == id) {
-
-            if (head == tail) {
+    while (aux != NULL)
+    {
+        if (aux->id == id)
+        {
+            if (head == tail)
+            {
                 head = tail = NULL;
             }
-            else if (aux == head) {
+            else if (aux == head)
+            {
                 head = head->sig;
                 head->ant = NULL;
             }
-            else if (aux == tail) {
+            else if (aux == tail)
+            {
                 tail = tail->ant;
                 tail->sig = NULL;
             }
-            else {
+            else
+            {
                 aux->ant->sig = aux->sig;
                 aux->sig->ant = aux->ant;
             }
@@ -142,10 +169,12 @@ void eliminarPorId(int id) {
     cout << "No existe\n";
 }
 
-void liberarLista() {
-    Nodo* aux = head;
-    while (aux != NULL) {
-        Nodo* borrar = aux;
+void liberarLista()
+{
+    Nodo *aux = head;
+    while (aux != NULL)
+    {
+        Nodo *borrar = aux;
         aux = aux->sig;
         delete borrar;
     }
@@ -153,12 +182,14 @@ void liberarLista() {
     contador = 0;
 }
 
-int main() {
+int main()
+{
     int op, id;
     string nombre;
     float peso;
 
-    do {
+    do
+    {
         cout << "\n--- MENU ---\n";
         cout << "1. Insertar inicio\n";
         cout << "2. Insertar final\n";
@@ -171,41 +202,54 @@ int main() {
         cout << "Opcion: ";
         cin >> op;
 
-        switch (op) {
-            case 1:
-                cin >> id >> nombre >> peso;
-                insertarInicio(id, nombre, peso);
-                break;
+        switch (op)
+        {
+        case 1:
+            cout << "Ingrese ID: ";
+            cin >> id;
+            cout << "Ingrese nombre: ";
+            cin >> nombre;
+            cout << "Ingrese peso: ";
+            cin >> peso;
+            insertarInicio(id, nombre, peso);
+            break;
 
-            case 2:
-                cin >> id >> nombre >> peso;
-                insertarFinal(id, nombre, peso);
-                break;
+        case 2:
+            cout << "Ingrese ID: ";
+            cin >> id;
+            cout << "Ingrese nombre: ";
+            cin >> nombre;
+            cout << "Ingrese peso: ";
+            cin >> peso;
+            insertarFinal(id, nombre, peso);
+            break;
 
-            case 3:
-                mostrarAdelante();
-                break;
+        case 3:
+            mostrarAdelante();
+            break;
 
-            case 4:
-                mostrarAtras();
-                break;
+        case 4:
+            mostrarAtras();
+            break;
 
-            case 5:
-                cout << "Total: " << contador << endl;
-                break;
+        case 5:
+            cout << "Total: " << contador << endl;
+            break;
 
-            case 6:
-                cin >> id;
-                if (buscarPorId(id))
-                    cout << "Existe\n";
-                else
-                    cout << "No existe\n";
-                break;
+        case 6:
+            cout << "Ingrese ID a buscar: ";
+            cin >> id;
+            if (buscarPorId(id))
+                cout << "Existe\n";
+            else
+                cout << "No existe\n";
+            break;
 
-            case 7:
-                cin >> id;
-                eliminarPorId(id);
-                break;
+        case 7:
+            cout << "Ingrese ID a eliminar: ";
+            cin >> id;
+            eliminarPorId(id);
+            break;
         }
 
     } while (op != 0);
